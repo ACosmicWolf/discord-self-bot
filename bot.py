@@ -14,6 +14,8 @@ tracemalloc.start()
 
 from dotenv import load_dotenv
 
+import random
+
 load_dotenv()
 
 
@@ -40,14 +42,56 @@ async def avatar(ctx, *,  avamember : discord.Member=None):
     userAvatarUrl = avamember.avatar
     await ctx.send(userAvatarUrl)
 
+# mute user
 @bot.command()
 async def mute(ctx, member: discord.Member):
-    await member.edit(mute=True)
-    await ctx.send(f"{member.mention} has been muted!")
+    role = discord.utils.get(ctx.guild.roles, name="Muted")
+    await member.add_roles(role)
+    await ctx.send(f'{member.mention} has been muted')
 
+# unmute user
 @bot.command()
 async def unmute(ctx, member: discord.Member):
-    await member.edit(mute=False)
-    await ctx.send(f"{member.mention} has been unmuted!")
+    role = discord.utils.get(ctx.guild.roles, name="Muted")
+    await member.remove_roles(role)
+    await ctx.send(f'{member.mention} has been unmuted')
+
+@bot.command()
+async def gayrate(ctx, member: discord.Member):
+    # check if member is the bot
+    if member == bot.user:
+        await ctx.send(f'{member.mention} is 0% Gay')
+    else:
+        await ctx.send(f'{member.mention} is {random.randint(30,100)}% Gay')
+
+@bot.command()
+async def UPI(ctx):
+    await ctx.send(f"<@{bot.user.id}> UPI is: rishish-god@fam")
+
+@bot.command()
+async def ltc(ctx):
+    await ctx.send(f"<@{bot.user.id}> LTC is: LhBvQWcygiPKoYQtzneZADi4nfQp2z8JjY")
+
+# simple calculator
+@bot.command()
+async def calc(ctx, num1: int, op, num2: int):
+    if op == "+":
+        await ctx.send(f"{num1} + {num2} = {num1 + num2}")
+    elif op == "-":
+        await ctx.send(f"{num1} - {num2} = {num1 - num2}")
+    elif op == "*":
+        await ctx.send(f"{num1} * {num2} = {num1 * num2}")
+    elif op == "/":
+        await ctx.send(f"{num1} / {num2} = {num1 / num2}")
+    else:
+        await ctx.send("Invalid operator")
+
+# on >shop command send message with server link
+@bot.command()
+async def shop(ctx):
+    await ctx.send("https://discord.gg/WsuEQQM4Sb")
+
+
+    
 
 bot.run(token)
