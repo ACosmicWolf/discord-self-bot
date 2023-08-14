@@ -43,11 +43,11 @@ async def avatar(ctx, *,  avamember : discord.Member=None):
 @bot.command()
 async def mute(ctx, member: discord.Member):
     await member.edit(mute=True)
+    await ctx.send(f"{member.mention} has been muted!")
 
 @bot.command()
 async def unmute(ctx, member: discord.Member):
     await member.edit(mute=False)
-
-
+    await ctx.send(f"{member.mention} has been unmuted!")
 
 bot.run(token)
