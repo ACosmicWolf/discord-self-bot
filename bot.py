@@ -12,15 +12,14 @@ import os
 import requests
 tracemalloc.start()
 
-from dotenv import load_dotenv
 
 import random
 
-load_dotenv()
 
-
-token = os.getenv('TOKEN')
-prefix = ">"
+with open('config/config.json') as f:
+    config = json.load(f)
+    token = config['token']
+    prefix = config['prefix']
 
 bot = commands.Bot(command_prefix=prefix, self_bot=True)
 
@@ -90,8 +89,5 @@ async def calc(ctx, num1: int, op, num2: int):
 @bot.command()
 async def shop(ctx):
     await ctx.send("https://discord.gg/WsuEQQM4Sb")
-
-
-    
 
 bot.run(token)
