@@ -40,5 +40,14 @@ async def avatar(ctx, *,  avamember : discord.Member=None):
     userAvatarUrl = avamember.avatar
     await ctx.send(userAvatarUrl)
 
+@bot.command()
+async def mute(ctx, member: discord.Member):
+    await member.edit(mute=True)
+
+@bot.command()
+async def unmute(ctx, member: discord.Member):
+    await member.edit(mute=False)
+
+
 
 bot.run(token)
