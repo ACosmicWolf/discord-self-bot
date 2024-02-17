@@ -1,6 +1,6 @@
 # Discord Self Bot
 
-A discord self bot I created for my friend
+A discord self bot created for a friend
 
 ## Installation
 
